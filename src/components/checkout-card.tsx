@@ -106,7 +106,7 @@ export function CheckoutCard() {
 
             <div>
               <label htmlFor="coupon" className="block text-sm font-medium">Coupon code <span className="font-normal text-neutral-500">(optional)</span></label>
-        
+  
               <input 
                 id="coupon" 
                 name="coupon" 

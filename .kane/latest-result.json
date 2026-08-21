@@ -2,22 +2,22 @@
   "status": "passed",
   "summary": "All Kane verifications passed.",
   "reason": "All verification objectives completed.",
-  "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J723E8TWSRE0KYYQZHCFDA/dashboard/share/US_IO4Z5T7MRAQDHCED7JWVIUDQYBVR5H4W925ZKS4BXCK5U4ZTFPX38CLK6LOEMAFZ?type=summary&agentView=true&fqdn=summary-page",
-  "timestamp": "2026-08-21T13:10:34.519Z",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J86XDCSTJSFHNYVSGF8J44/dashboard/share/US_GWAMYVR9WEEER44Z0GLQR6FHJD277FA88O0OENQV88O7T6OVD8SHZDW3BUTRCTU0?type=summary&agentView=true&fqdn=summary-page",
+  "timestamp": "2026-08-21T13:30:45.118Z",
   "verifications": [
     {
       "name": "Coupon verification",
       "status": "passed",
-      "summary": "The task was to enter the coupon code SAVE20 at checkout and apply it.\nThe coupon was applied on the checkout page.\nThe order summary showed a final total of $80.00, so the requested discount was reflected successfully.",
+      "summary": "Entered the coupon code SAVE20 in the checkout coupon field and applied it.\nVerified that the order summary updated and the final total shown was $80.00.\nCompleted the requested coupon application successfully on the checkout page.",
       "reason": "Objective completed",
-      "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J709J9DYN43JFP08CF79ME/dashboard/share/US_UYSAY4QA2Y5CQIDYV2O26CTF7DALSXWAI6CY0OUKDGXXJ404UKZBQGU7QK4NRIP0?type=summary&agentView=true&fqdn=summary-page"
+      "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J853HBPHJ3KHPY4W9BDNYR/dashboard/share/US_RI4SN91V693L7V83ES89TREB6NUHLO7X55RC9DO2R5OBAKR1K3OBURQG4AIFAOWG?type=summary&agentView=true&fqdn=summary-page"
     },
     {
       "name": "Quantity verification",
       "status": "passed",
-      "summary": "The task was to change the quantity on the checkout page from 1 to 2.\nThe quantity was updated on the checkout page at localhost:3000/checkout.\nThe order summary was checked after the change, and the final total displayed was $200.00.\nThe task was completed successfully.",
+      "summary": "Updated the item quantity on the checkout page from 1 to 2.\nChecked the order summary after the change.\nThe final total shown in the order summary was $200.00, so the task was completed successfully.",
       "reason": "Objective completed",
-      "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J723E8TWSRE0KYYQZHCFDA/dashboard/share/US_IO4Z5T7MRAQDHCED7JWVIUDQYBVR5H4W925ZKS4BXCK5U4ZTFPX38CLK6LOEMAFZ?type=summary&agentView=true&fqdn=summary-page"
+      "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J86XDCSTJSFHNYVSGF8J44/dashboard/share/US_GWAMYVR9WEEER44Z0GLQR6FHJD277FA88O0OENQV88O7T6OVD8SHZDW3BUTRCTU0?type=summary&agentView=true&fqdn=summary-page"
     }
   ]
 }
