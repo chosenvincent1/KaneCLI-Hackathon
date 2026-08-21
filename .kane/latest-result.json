@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "summary": "Entered the coupon code SAVE20 on the checkout page and applied it.\nChecked the order summary after applying the coupon.\nThe final total shown in the order summary was $80.00, so the coupon was applied successfully.",
+  "reason": "Objective completed",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J6DC27VM607RCXHZZMDC29/dashboard/share/US_R2NBB3NKYY3Q36J8V33NV163AWWMMX7ES4PXURPZYH4NWLTCVYH8M6J1DMTHMQQE?type=summary&agentView=true&fqdn=summary-page",
+  "timestamp": "2026-08-21T12:59:20.980Z"
+}

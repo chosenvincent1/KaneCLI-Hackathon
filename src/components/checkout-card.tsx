@@ -106,8 +106,20 @@ export function CheckoutCard() {
 
             <div>
               <label htmlFor="coupon" className="block text-sm font-medium">Coupon code <span className="font-normal text-neutral-500">(optional)</span></label>
-              <input id="coupon" name="coupon" type="text" value={coupon} onChange={(event) => setCoupon(event.target.value)} autoComplete="off" placeholder="Enter coupon code" className="mt-2 w-full border border-neutral-300 bg-white px-3.5 py-3 text-sm uppercase text-black outline-none placeholder:normal-case placeholder:text-neutral-400 focus:border-black focus:ring-1 focus:ring-black" />
-              <p className="mt-2 min-h-5 text-xs text-neutral-500" aria-live="polite">{hasDiscount ? "SAVE20 applied. 20% discount added." : "Use SAVE20 for 20% off."}</p>
+          
+              <input 
+                id="coupon" 
+                name="coupon" 
+                type="text" 
+                value={coupon} 
+                onChange={(event) => setCoupon(event.target.value)} 
+                autoComplete="off" 
+                placeholder="Enter coupon code" 
+                className="mt-2 w-full border border-neutral-300 bg-white px-3.5 py-3 text-sm uppercase text-black outline-none placeholder:normal-case placeholder:text-neutral-400 focus:border-black focus:ring-1 focus:ring-black" 
+              />
+              <p className="mt-2 min-h-5 text-xs text-neutral-500" aria-live="polite">
+                {hasDiscount ? "SAVE20 applied. 20% discount added." : "Use SAVE20 for 20% off."}
+              </p>
             </div>
           </form>
         </section>
