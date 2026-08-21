@@ -1,7 +1,23 @@
 {
   "status": "passed",
-  "summary": "Entered the coupon code SAVE20 on the checkout page and applied it.\nChecked the order summary after applying the coupon.\nThe final total shown in the order summary was $80.00, so the coupon was applied successfully.",
-  "reason": "Objective completed",
-  "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J6DC27VM607RCXHZZMDC29/dashboard/share/US_R2NBB3NKYY3Q36J8V33NV163AWWMMX7ES4PXURPZYH4NWLTCVYH8M6J1DMTHMQQE?type=summary&agentView=true&fqdn=summary-page",
-  "timestamp": "2026-08-21T12:59:20.980Z"
+  "summary": "All Kane verifications passed.",
+  "reason": "All verification objectives completed.",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J723E8TWSRE0KYYQZHCFDA/dashboard/share/US_IO4Z5T7MRAQDHCED7JWVIUDQYBVR5H4W925ZKS4BXCK5U4ZTFPX38CLK6LOEMAFZ?type=summary&agentView=true&fqdn=summary-page",
+  "timestamp": "2026-08-21T13:10:34.519Z",
+  "verifications": [
+    {
+      "name": "Coupon verification",
+      "status": "passed",
+      "summary": "The task was to enter the coupon code SAVE20 at checkout and apply it.\nThe coupon was applied on the checkout page.\nThe order summary showed a final total of $80.00, so the requested discount was reflected successfully.",
+      "reason": "Objective completed",
+      "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J709J9DYN43JFP08CF79ME/dashboard/share/US_UYSAY4QA2Y5CQIDYV2O26CTF7DALSXWAI6CY0OUKDGXXJ404UKZBQGU7QK4NRIP0?type=summary&agentView=true&fqdn=summary-page"
+    },
+    {
+      "name": "Quantity verification",
+      "status": "passed",
+      "summary": "The task was to change the quantity on the checkout page from 1 to 2.\nThe quantity was updated on the checkout page at localhost:3000/checkout.\nThe order summary was checked after the change, and the final total displayed was $200.00.\nThe task was completed successfully.",
+      "reason": "Objective completed",
+      "test_url": "https://test-manager.lambdatest.com/projects/01M0DN54J8MHC0MKRKAP4E9JCV/test-cases/01M0J723E8TWSRE0KYYQZHCFDA/dashboard/share/US_IO4Z5T7MRAQDHCED7JWVIUDQYBVR5H4W925ZKS4BXCK5U4ZTFPX38CLK6LOEMAFZ?type=summary&agentView=true&fqdn=summary-page"
+    }
+  ]
 }

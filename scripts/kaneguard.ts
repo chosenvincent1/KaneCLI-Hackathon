@@ -6,7 +6,15 @@ import chokidar from "chokidar";
 const objective =
   "On the checkout page, enter SAVE20 in the coupon field, click Apply Coupon, then verify that the final total displayed in the order summary is exactly $80.00";
 
-const DEBOUNCE_DELAY = 3000;
+const quantityObjective =
+  "On the checkout page, change the quantity from 1 to 2, then verify that the final total displayed in the order summary is exactly $200.00";
+
+const verificationScenarios = [
+  { name: "Coupon verification", objective },
+  { name: "Quantity verification", objective: quantityObjective },
+];
+
+const DEBOUNCE_DELAY = 5000;
 
 let isRunning = false;
 let debounceTimer: NodeJS.Timeout | undefined;
@@ -28,7 +36,13 @@ type KaneResult = {
   stderr: string;
 };
 
-function runKane() {
+type VerificationResult = {
+  name: string;
+  result: KaneResult;
+  runEnd?: KaneEvent;
+};
+
+function runKane(objective: string) {
   return new Promise<KaneResult>((resolve) => {
     let stdout = "";
     let stderr = "";
@@ -120,19 +134,44 @@ function showFailureDetails(result: KaneResult, runEnd?: KaneEvent) {
   }
 }
 
-async function saveLatestResult(result: KaneResult, runEnd?: KaneEvent) {
-  const status = runEnd?.status === "passed" ? "passed" : "failed";
-  const failureDetails = getFailureDetails(result);
+function isPassed(verification: VerificationResult) {
+  return verification.runEnd?.status === "passed";
+}
+
+async function saveLatestResult(verifications: VerificationResult[]) {
+  const status = verifications.every(isPassed) ? "passed" : "failed";
+  const scenarioResults = verifications.map(({ name, result, runEnd }) => {
+    const scenarioStatus = runEnd?.status === "passed" ? "passed" : "failed";
+    const failureDetails = getFailureDetails(result);
+
+    return {
+      name,
+      status: scenarioStatus,
+      summary: runEnd?.summary ?? "Kane did not return a final result.",
+      reason:
+        runEnd?.reason ??
+        failureDetails[0] ??
+        `Kane exited with code ${result.exitCode}.`,
+      ...(runEnd?.test_url ? { test_url: runEnd.test_url } : {}),
+      ...(scenarioStatus === "failed" ? { failure_details: failureDetails } : {}),
+    };
+  });
+  const primaryResult =
+    scenarioResults.find((scenario) => scenario.status === "failed") ??
+    scenarioResults.at(-1);
   const latestResult = {
     status,
-    summary: runEnd?.summary ?? "Kane did not return a final result.",
+    summary:
+      status === "passed"
+        ? "All Kane verifications passed."
+        : "One or more Kane verifications failed.",
     reason:
-      runEnd?.reason ??
-      failureDetails[0] ??
-      `Kane exited with code ${result.exitCode}.`,
-    ...(runEnd?.test_url ? { test_url: runEnd.test_url } : {}),
+      status === "passed"
+        ? "All verification objectives completed."
+        : "Review the failed verification details.",
+    ...(primaryResult?.test_url ? { test_url: primaryResult.test_url } : {}),
     timestamp: new Date().toISOString(),
-    ...(status === "failed" ? { failure_details: failureDetails } : {}),
+    verifications: scenarioResults,
   };
   const kaneDirectory = join(process.cwd(), ".kane");
 
@@ -142,6 +181,18 @@ async function saveLatestResult(result: KaneResult, runEnd?: KaneEvent) {
     `${JSON.stringify(latestResult, null, 2)}\n`,
     "utf8",
   );
+}
+
+function reportVerification(verification: VerificationResult) {
+  console.log(`\n${verification.name}:`);
+
+  if (isPassed(verification)) {
+    console.log("✓ Kane verification passed.");
+    return;
+  }
+
+  console.log("✗ Kane verification failed.");
+  showFailureDetails(verification.result, verification.runEnd);
 }
 
 async function verifyChanges(filePath: string) {
@@ -157,20 +208,27 @@ async function verifyChanges(filePath: string) {
   try {
     console.log("\nRunning Kane verification...\n");
 
-    const result = await runKane();
-    const runEnd = result.events.find((event) => event.type === "run_end");
+    const verifications: VerificationResult[] = [];
+
+    for (const scenario of verificationScenarios) {
+      const result = await runKane(scenario.objective);
+      const runEnd = result.events.find((event) => event.type === "run_end");
+      const verification = { name: scenario.name, result, runEnd };
+
+      verifications.push(verification);
+      reportVerification(verification);
+    }
 
     try {
-      await saveLatestResult(result, runEnd);
+      await saveLatestResult(verifications);
     } catch (error) {
       console.error("Unable to save the latest Kane result.", error);
     }
 
-    if (runEnd?.status === "passed") {
-      console.log("✓ Kane verification passed.");
+    if (verifications.every(isPassed)) {
+      console.log("\n✓ All Kane verifications passed.");
     } else {
-      console.log("✗ Kane verification failed.");
-      showFailureDetails(result, runEnd);
+      console.log("\n✗ Kane verification suite failed.");
     }
   } finally {
     isRunning = false;
